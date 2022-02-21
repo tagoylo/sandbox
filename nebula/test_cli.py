@@ -1,6 +1,4 @@
 #install nebula first
-
-import fabric
 from fabric import *
 
 c = Connection("host")
