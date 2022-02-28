@@ -91,6 +91,7 @@ lock(label: 'adgt_test_harness_boards'){
             def pwd = sh(returnStdout: true, script: 'pwd').trim()
             withEnv(['VERBOSE=1', 'BUILD_DIR=' +pwd]){
                 def project = nebula('update-config board-config no-os-project --board-name='+board)
+                def example = nebula('update-config board-config example --board-name='+board)
                 def jtag_cable_id = nebula('update-config jtag-config jtag_cable_id --board-name='+board)
                 def files = ['2019.1':'system_top.hdf', '2020.1':'system_top.xsa', '2021.1':'system_top.xsa']
                 def file = files[vivado_ver]
@@ -127,8 +128,12 @@ lock(label: 'adgt_test_harness_boards'){
                 switch(example){
                     case ["iio", "iio_fmcomms5"]:
                         //do something
+                        sleep(5)
+                        def serial = nebula('update-config uart-config address --board-name='+board)
+                        sh 'iio_info -u serial:' + serial + ',921600'
                     case ["dma_example", "dma-example"]:
                         //do something
+                        
                     case []
 
 
