@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+    runner:
+      image: tcardonne/github-runner:latest
+      environment:
+        RUNNER_NAME: "nebula-runner"
+        RUNNER_REPOSITORY_URL: https://github.com/sdgtt/nebula
+        #RUNNER_ORGANIZATION_URL: ${RUNNER_ORGANIZATION_URL}
+        RUNNER_TOKEN: ${RUNNER_TOKEN}
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      env_file:
+        - ../../.env
