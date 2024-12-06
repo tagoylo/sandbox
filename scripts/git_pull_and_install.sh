@@ -65,3 +65,5 @@ else
 fi
 
 echo "Installation completed successfully!"
+
+echo "Execution completed on: $(date)"
